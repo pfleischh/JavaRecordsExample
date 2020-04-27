@@ -6,10 +6,10 @@ import java.sql.*;
 
 public class ProductDB
 {
-    //Note that the connection object is declared as a class level variable so that all methods can "see" & use the connection object	
+  
 	private Connection connection = null;
 	
-	public ProductDB() //default constructor method (no parameters passed to it, same name as class, no return data type)
+	public ProductDB()
 	{
 		String rValue = connect(); //call the connect method and set up the connection for all the methods in this class to use 
 		System.out.print(rValue);  //display message returned by connect( ) method on Server Console for debug purposes
@@ -43,9 +43,7 @@ public class ProductDB
 			ArrayList<Product> products = new ArrayList<Product>(); //create an empty ArrayList<> to store Product objects
 			String query = "SELECT id, product_name, list_price FROM products ORDER BY id ASC"; //Create SQL query String
 			
-			/** The PreparedStatement class is used to prepare the statement for sending to the DBMS - see pages 516-517 in your textbook
-			 * for an explanation of this class and how it is utilized. Use the connection object's prepareStatement( ) method
-			 * to prepare SQL statement to execute  **/
+
 			PreparedStatement ps = connection.prepareStatement(query); 
 			ResultSet rs = ps.executeQuery(); //query the database management system (DBMS) and store the ResultSet object returned
 
@@ -80,9 +78,7 @@ public class ProductDB
 			String selectProduct =
 				"SELECT id, product_name, list_price FROM products WHERE id = ?"; //create SQL statement except for ProductCode value to be inserted by ps.setString( ) call below
 			
-			/** The PreparedStatement class is used to prepare the statement for sending to the DBMS - see pages 516-517 in your textbook
-			 * for an explanation of this class and how it is utilized. Use the connection object's prepareStatement( ) method
-			 * to prepare SQL statement to execute  **/
+
 			PreparedStatement ps = connection.prepareStatement(selectProduct); //create Prepared Statement object from connection( ) method
 			ps.setString(1, productId); //replace ? above with the code parameter passed to getProduct( ) method
 			ResultSet rs = ps.executeQuery(); //send SQL statement to DBMS and store the ResultSet object returned
